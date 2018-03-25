@@ -5,8 +5,6 @@
 void enq1(int);
 void enq2(int);
 void display();
-void pop1();
-void pop2();
 int queue1[size],queue2[size],fronts=-1,rears=-1,frontt=-1,reart=-1;
 void enq1(int val1)
 { if(rears==size-1)
@@ -32,20 +30,27 @@ else
  printf("Teachers are inserted\n");
 }
 }
-void pop1(){
-   if(fronts == rears)
-      printf("no student available Queue is Empty!\n");
-   else{
-      printf("\nDeleted : %d\n", queue1[fronts]);
+void process(){
+   if(reart == -1)
+     {
+      printf("no teacher in queue to process!\n");
+	while(fronts<=rears)
+	{
+      printf("\nProcessed : %d\n", queue1[fronts]);
       fronts++;
+	}
    }
-}
-void pop2(){
-   if(frontt == reart)
-      printf("no teacher avialable  Queue is Empty!\n");
    else{
-      printf("\nDeleted : %d\n", queue1[frontt]);
+      while(frontt<=reart)
+	{
+      printf("\nProcessed : %d\n", queue2[frontt]);
       frontt++;
+	}
+	while(fronts<=rears)
+	{
+      printf("\nProcessed : %d\n", queue1[fronts]);
+      fronts++;
+	}
    }
 }
 
@@ -81,6 +86,7 @@ int main()
     printf("enter your choice\n");
     scanf("%d",&ch1);
     switch(ch1)
+
     { case 1:
       printf("press1: to insert student\n");
       printf("press2: to insert teacher\n");
@@ -97,22 +103,10 @@ int main()
          enq2(val2);
          break;
        }
-
       break;
-
       case 2:
-      printf("press1: to pop student\n");
-      printf("press2: to pop teacher\n");
-      scanf("%d",&ch3);
-      switch(ch3)
-      {case 1:
-         pop1();
-         break;
-      case 2:
-      pop2();
-      break;
-      }
-      break;
+       process();
+       break;
       case 3:
       display();
       break;
