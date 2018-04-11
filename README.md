@@ -18,3 +18,4 @@ Test Cases:
 2-Priority will be given to teacher.
 3-Both the teacher and the student must get the FIFO service.
 4-If a teacher is in process and a new teacher comes then he will be processe next not the student.
+5-Both teacher and student must go and stand at the tail of th queue.
