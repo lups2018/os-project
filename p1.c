@@ -2,33 +2,23 @@
 #include<stdio.h>
 #define size 10
 void enq1(int,int);
-void enq2(int);
+void enq2(int,int);
 void display();
-void book(int);
 int queue1[size],queue2[size],fronts=-1,rears=-1,frontt=-1,reart=-1;
-int stud[10],b2[10];
-int count=5;
-void enq1(int val1,int c)
-{
- if(rears==size-1)
+int s[10],b[10];
+void enq1(int val1,int sb)
+{ if(rears==size-1)
   {printf("student queue is full:insertion not possible"); 
   }
 else
-{
-if(fronts==-1)
+{if(fronts==-1)
   fronts=0;
   rears++;
  queue1[rears]=val1;
- 
- printf("students are inserted\n");
-//printf("enter book");
-stud[rears]=c;
-printf("books inserted are %d\n",stud[rears]);
+ s[rears]=sb;
 }
 }
-
-  
-void enq2(int val2)
+void enq2(int val2,int tb)
 { if(reart==size-1)
   {printf("Teacher queue is full:insertion not possible\n"); 
   }
@@ -37,7 +27,8 @@ else
   frontt=0;
   reart++;
  queue2[reart]=val2;
- printf("Teachers are inserted\n");
+ b[reart]=tb;
+ 
 }
 }
 void process(){
@@ -49,9 +40,11 @@ void process(){
          printf("no student in queue to process!\n");
  	} 
         else{
-              printf("\nProcessed student: %d\n", queue1[fronts]);
+              while(fronts<=rears)
+	{
+      printf("\nProcessed student: %d\n", queue1[fronts]);
       fronts++;
-      rears=-1;
+	}
              } 
       
    }
@@ -61,40 +54,58 @@ void process(){
       printf("\nProcessed teacher: %d\n", queue2[frontt]);
       frontt++;
 	}
+	if(rears==-1)
+		printf("No Student in Queue\n");
+	else
+	{
 	while(fronts<=rears)
 	{
       printf("\nProcessed student: %d\n", queue1[fronts]);
       fronts++;
 	}
+	}
    }
+rears=-1;
+reart=-1;
 }
 
 void display(){
-   int i,j;
+   int i;
    if(reart == -1)
       {printf("\nno teacher in queue!!!\n");
-       printf("students!!!books\n");
+	if(rears==-1)
+		printf("No Student in Queue\n");
+	else
+{
+	printf("students!books\n");
        for(i=fronts; i<=rears; i++)
-       {
-	 printf("%d\n",queue1[i]);
-         printf("%d\n",stud[i]);
-        
-       }
-       
+	 {printf("%d|",queue1[i]);
+          printf("%d\n",s[i]);
+          }
+}
 }
    else{
       int i;
-      printf("teahcers!!!\n");
+      printf("teachers!books\n");
       for(i=frontt; i<=reart; i++)
-	 printf("%d\n",queue2[i]);
-      printf("students!!!\n");
+	 {printf("%d|",queue2[i]);
+          printf("%d\n",b[i]);
+          }
+	if(rears==-1)
+		printf("No Student in Queue\n");
+	else
+{
+      printf("students!books\n");
       for(i=fronts; i<=rears; i++)
-	 printf("%d\n",queue1[i]);
+	 {printf("%d|",queue1[i]);
+          printf("%d\n",s[i]);
+          }
+}
    }
 }
 
 int main()
-{ int val1,val2,ch1,ch2,ch3,c;
+{ int val1,val2,ch1,ch2,ch3,n,sb,tb;
   while(1)
   { 
     printf("\tMenu for id's of Student and Teacher\n");
@@ -104,6 +115,11 @@ int main()
     printf("\t\t|   5   |   6   |\n");
     printf("\t\t|   7   |   8   |\n");
     printf("\t\t|   9   |  10   |\n");
+    printf("\t\t|  11   |  12   |\n");
+    printf("\t\t|  13   |  16   |\n");
+    printf("\t\t|  15   |  18   |\n");
+    printf("\t\t|  17   |  19   |\n");
+    printf("\t\t|  19   |  20   |\n");
     printf("\t\tMenu\n");
     printf("1-press1: insert student or teacher on queue.\n");
     printf("2-press2: process student or teacher on library counter.\n");
@@ -118,17 +134,44 @@ int main()
        scanf("%d",&ch2);  
        switch(ch2)
       { case 1: 
-         printf("enter the values to insert\n");
-         scanf("%d",&val1);
-         //enq1(val1);
-         printf("enter the books\n");
-         scanf("%d",&c);
-         enq1(val1,c);
+         printf("enter the no of students\n");
+	scanf("%d",&n);
+	while(n>0)
+	{
+        A:printf("Student id\n");
+        scanf("%d",&val1);
+        printf("Books\n");
+        scanf("%d",&sb);
+	if(val1<=20 && val1>=1 && val1%2==1)
+         enq1(val1,sb);
+	else
+	{
+	printf("Invalid id\n");
+	goto A;
+	}
+	n--;
+	}
+	printf("students are inserted\n");
          break;
-        case 2:// teacher
-         printf("enter the values to insert\n");
-         scanf("%d",&val2);
-         enq2(val2);
+        case 2:
+         printf("enter the no of teachers\n");
+	scanf("%d",&n);
+	while(n>0)
+	{
+        printf("Teachers id\n");
+        B:scanf("%d",&val2);
+        printf("Books\n");
+        scanf("%d",&tb);
+	if(val2<=20 && val2>=2 && val2%2==0)
+         enq2(val2,tb);
+	else
+	{
+	printf("Invalid id\n");
+	goto B;
+	}
+	n--;
+	}
+	printf("Teachers are inserted\n");
          break;
        }
       break;
