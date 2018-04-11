@@ -13,3 +13,8 @@ If a teacher is being served and during the period when he is being served, anot
 comes, then that teacher would get the service next. This process might continue leading to
 increase in waiting time of students. Ensure in your program that the waiting time of students is
 minimized.
+Test Cases:
+1-Teacher will be processed first.
+2-Priority will be given to teacher.
+3-Both the teacher and the student must get the FIFO service.
+4-If a teacher is in process and a new teacher comes then he will be processe next not the student.
