@@ -5,7 +5,7 @@ void enq1(int,int);
 void enq2(int,int);
 void display();
 int queue1[size],queue2[size],fronts=-1,rears=-1,frontt=-1,reart=-1;
-int s[10],b[10];
+int s[size],b[size];
 void enq1(int val1,int sb)
 { if(rears==size-1)
   {printf("student queue is full:insertion not possible"); 
@@ -49,10 +49,20 @@ void process(){
       
    }
    else{
+	int count=0;
       while(frontt<=reart)
+	{
+	if(b[frontt]>5 && count==0)
+	{
+		count=1;
+		 printf("\nProcessed student: %d\n", queue1[fronts]);
+      		fronts++;
+	}	
+	else
 	{
       printf("\nProcessed teacher: %d\n", queue2[frontt]);
       frontt++;
+	}
 	}
 	if(rears==-1)
 		printf("No Student in Queue\n");
